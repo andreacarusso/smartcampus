@@ -12,5 +12,17 @@ services:
       timeout: 5s
       retries: 10
 
+  jupyter:
+    build: ./jupyter
+    env_file: .env
+    ports:
+      - "8891:8888"
+    volumes:
+      - ./notebooks:/home/jovyan/work/notebooks
+      - ./data:/home/jovyan/work/data
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   pgdata:
