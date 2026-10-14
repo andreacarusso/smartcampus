@@ -24,5 +24,14 @@ services:
       db:
         condition: service_healthy
 
+  api:
+    build: ./api
+    env_file: .env
+    ports:
+      - "5001:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+
 volumes:
   pgdata:
